@@ -22,6 +22,9 @@ function App() {
   },[length,isNumber,isCharacter])
   generatePass();
   const copyPasswordToClipboard = useCallback(() => {
+    // optional chaining 
+    // ? . if passwordRef is undefined or null rest of the chain is skipped
+    // ES2020 feature
     passwordRef.current?.select();
     // passwordRef.current?.setSelectionRange(0, 101);
     window.navigator.clipboard.writeText(pass)
