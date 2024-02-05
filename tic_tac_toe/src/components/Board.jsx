@@ -8,22 +8,19 @@ function Square({data,handleClick}){
     )
 }
 
-export default function Board(){
-        const [squares,setSquares] = useState(Array(9).fill(null));
-        const [xmove,setXmove] = useState(true);
+export default function Board({isXnext,squares,onPlay}){
         let status;
         const winner=calculateWinner(squares)
         if(winner){
             status="Winner : "+winner;
         }else{
-            status="Next Player : "+(xmove? "X" :"O");
+            status="Next Player : "+(isXnext? "X" :"O");
         }
         function handleClick(index){
             if(calculateWinner(squares) || squares[index]) return;
             const nextSquares = squares.slice();
-            nextSquares[index]=xmove?"X":"O";
-            setSquares(nextSquares);
-            setXmove(!xmove)
+            nextSquares[index]=isXnext?"X":"O";
+            onPlay(nextSquares);
         }
         function calculateWinner(squares) {
             const lines = [
