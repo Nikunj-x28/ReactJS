@@ -88,6 +88,16 @@ body {
 
 .game-info {
   margin-left: 20px;
+  cursor: pointer;
+}
+
+.winner{
+   color: rgb(226, 91, 231);
+}
+
+.toggle-moves{
+   margin-top: 2rem;
+   margin-left: 5rem;
 }
 
 
