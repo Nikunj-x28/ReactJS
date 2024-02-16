@@ -1,16 +1,42 @@
-import { useState ,useRef } from "react"
-function Square({data,handleClick,isWinner}){
+import { useState ,useEffect } from "react"
+function Square({data,handleClick,isWinner,winner}){
     return (
-        <button className={`square ${isWinner?'winner':''}`}
+        <button className={`square ${(isWinner&&winner)?'winner':''}`}
         onClick={
             handleClick
         }>{data}</button>
     )
 }
-
+function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return lines[i];
+      }
+    }
+    let draw=true;
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a]===null || squares[b]===null || squares[c]===null) {
+            draw=false;
+        }
+    }
+    if(draw) return "draw";   
+    return null;
+}
 export default function Board({isXnext,squares,onPlay}){
         const [isWinner,setIsWinner] = useState([])
-        let movesPlayed = useRef(0);
+        
         let status;
         const winner=calculateWinner(squares)
         if(winner){
@@ -27,35 +53,14 @@ export default function Board({isXnext,squares,onPlay}){
             status="Next Player : "+(isXnext? "X" :"O");
         }
         function handleClick(index){
-            if(calculateWinner(squares) || squares[index]) return;
+            if(winner || squares[index]) {
+                // console.log(calculateWinner(squares));
+                return;
+            }
             const nextSquares = squares.slice();
             nextSquares[index]=isXnext?"X":"O";
             onPlay(nextSquares);
-            movesPlayed.current+=1;
         }
-        function calculateWinner(squares) {
-            const lines = [
-              [0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8],
-              [0, 3, 6],
-              [1, 4, 7],
-              [2, 5, 8],
-              [0, 4, 8],
-              [2, 4, 6]
-            ];
-            for (let i = 0; i < lines.length; i++) {
-              const [a, b, c] = lines[i];
-              if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return lines[i];
-              }
-            }
-            if(movesPlayed.current === squares.length){
-                return "draw";
-            }
-            return null;
-        }
-        
         function renderRow(rowIndex,rowKey){
             let row=[]
             for(let j=0;j<3;j++){
@@ -63,7 +68,8 @@ export default function Board({isXnext,squares,onPlay}){
                     <Square data={squares[3*rowIndex+j]} key={3*rowIndex+j} handleClick={()=>{
                         handleClick(3*rowIndex+j)
                     }}
-                    isWinner={isWinner.includes(3*rowIndex+j)}/> 
+                    isWinner={isWinner.includes(3*rowIndex+j)}
+                    winner={calculateWinner(squares)}/> 
                 );
             }
             return <div key={rowKey} className="board-row">{row}</div>;
