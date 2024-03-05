@@ -1,0 +1,66 @@
+Bundlers = bundle our code in a single file.
+
+Dependencies = Dev Dependencies and Normal Dependencies
+               npm install -D -> tell npm it is a dev dependency.
+
+npm init = The npm init command is used to initialize a new Node.js/React project and creates
+           a package.json file, which is a metadata file for the project. 
+
+package.json= configuration file for npm it keeps track of which version of the dependency
+              we are using. 
+
+package-lock.json= keeps track of exact version of dependency and their transitive dependencies.
+                   gets updated when we update dependencies.
+                   It ensures consistency and reproducibility across different environments.
+
+^ vs ~ = The caret (^) allows for more flexibility in updating dependencies by permitting minor version updates,
+         while the tilde (~) restricts updates to only the latest patch versions within a fixed minor version.
+         Neither the caret (^) nor the tilde (~) operators will update to a new major version of a dependency. 
+
+node_modules = actual data 
+               node_modules has all the transitive dependencies
+               our dependency-> parcel -> its dependency -> ....
+
+npx = executing a package
+
+Not a good way to bring React to our project
+versions may change of React in future also fetching a network resource
+could be expensive.
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"> 
+</script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+</script>
+
+
+
+Parcel Tasks = https://parceljs.org/
+
+browserlist = Developers often use tools like Babel or Autoprefixer, which leverage the "browserlist"
+               configuration to determine which transformations and optimizations are necessary for the
+               target browsers.
+               other browsers may also work that are not in the browserlist.
+               but all the browsers will definitely work that are in the browserlist.
+
+npm scripts = just a way to save time and get away from big commands.
+              syntax -> npm run script
+              npm run start -> npm start (only works for start)
+              This shorthand is provided by npm for convenience and is specifically designed for start.
+
+Babel = Babel is a widely-used JavaScript compiler that converts modern ES6+ code into backward-compatible
+        JavaScript, enabling it to run in older browsers and environments. It allows developers to leverage
+        the latest language features without worrying about compatibility issues. Babel can also transform 
+        JSX syntax used in React into plain JavaScript, making it an essential tool for modern web development,
+        ensuring code cleanliness and broad compatibility.
+
+Our React code is readable because of JSX.
+Our React code is fast because of React , Parcel(bundlers) and other tools.
+
+You need to wrap jsx with ( ) if you write your JSX in multiple lines.
+
+Some tags in JSX =>
+img
+a
+
+How JSX prevents Cross Site Scripting
+
+
