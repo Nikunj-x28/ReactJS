@@ -4,6 +4,8 @@
   "description": "Learning the b.t.s working of create react app",
   "main": "App.js",
   "scripts": {
+    "start":"parcel index.html",
+    "build":"parcel build index.html",
     "test": "jest"
   },
   "repository": {
