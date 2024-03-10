@@ -1,0 +1,62 @@
+*** REACT
+Its a JavaScript library which helps in writing complex user interfaces.
+
+***REACT and REACT-DOM
+They are the main libraries for any react web development project.
+REACT = It provides the fundamental building blocks for creating user interfaces with components,
+state management, and rendering logic.It can be used to create UIs for various platforms, including web, 
+mobile, and desktop.
+REACT-DOM = ReactDOM is specifically designed to work with the browser environment.
+It takes React components and renders them into the actual DOM (Document Object Model) of a web page,
+allowing users to interact with them.
+
+*** WHY NodeJS ?
+React doesn't depend on node but the bundlers and packages used by most React developers do.
+(Webpack, Babael etc.) So while React doesn't need node to run, most people install node for development.
+You would be spending a lot of time building your own solution for bundling, transpiling, optimizing outside
+of node. The web development packages built on node(npm) are too much of a time saver.
+
+***BUNDLERS
+Bundlers convert our React code to Browser readable format (among doing other things like optimization)
+Webpack , vite are some bundlers.
+
+*** BABEL
+Babel is a JavaScript compiler that allows developers to write code using the latest ECMAScript (ES) standards
+(or even future standards) and then transpile that code into an older version of JavaScript that can be
+executed by current browsers or environments.
+
+***NPM
+Node Package Manager, commonly known as npm, is the default package manager for Node.js.The term "npm" is used
+to refer to both the command-line tool (Node Package Manager) and the online package registry (npm Registry
+/npm repository). npm is used to install, share, and manage dependencies in JavaScript projects.
+While Node.js is a common runtime for many JavaScript packages, the npm registry is not exclusive to Node.js.
+It is a central repository for a wide range of JavaScript packages that can be utilized in various environments
+and platforms.
+
+***NPM install
+The npm install command installs packages specifically within your project folder,not globally on your system
+npm install -g <package-name>
+This installs the package globally on your system, making it available for use in any project.
+
+***PACKAGE.JSON
+npm utilizes a package.json file to manage project metadata and dependencies. This file includes information
+about the project, its dependencies, and various configuration settings.
+
+***NPM vs NPX
+npm vs npx (both come with the NodeJs installation)
+-> Npm is a tool that use to install packages.
+-> Npx is a tool that use to execute packages.
+
+***CRA
+create-react-app is a utlitity software that automatically provides us a boilerplate to start our react project 
+and installs all the packages related to the Build process.
+
+***BUILD PROCESS
+Process of making react code in browser friendly format.
+
+***After running CRA command or Vite command
+In our package.json file, we have some scripts set up for us: we can use these scripts to run our
+development server , build - to create a version of your project that's optimized for deployment to a
+production environment , and other scripts.
+
+

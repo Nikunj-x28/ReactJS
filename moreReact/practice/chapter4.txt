@@ -1,8 +1,9 @@
 Props in react => something we can pass to a component/argumnets to a function
 
-Conflict driven UI
-A Conflict-Driven UI aims to improve collaboration and reduce data inconsistencies
-in applications where multiple users are working on shared data sets.
+Config driven UI
+A "config-driven UI" refers to a user interface (UI) design approach where the layout, appearance,
+behavior, and other aspects of the UI are largely determined by configuration data rather than hardcoded
+within the application code.
 
 Unique Key Property = 
 https://react.dev/learn/rendering-lists
@@ -29,6 +30,7 @@ When is it safe to use index as key in a list?
 
 The import and export syntax is part of ECMAScript 2015 (ES6). It was introduced as a standardized way
 to manage modules in JavaScript. 
+When importing a default export, you can choose any name for the imported value.
 
 EXPORTING WITHOUT DEFAULT
 // mathUtils.js
@@ -46,6 +48,19 @@ console.log(subtract(5, 3)); // Output: 2
 In app.js, we import add and subtract using curly braces {} and specifying their names within the braces.
 This syntax allows us to import only the named exports we need from the module mathUtils.js.
 
+import * syntax 
+// Module.js
+export const name = 'John';
+export function greet() {
+  console.log('Hello!');
+}
+// AnotherModule.js
+import * as Module from './Module.js';
+console.log(Module.name);
+Module.greet();
+
+
+
 React tries to make sure the Data layer and the UI layer stay consistent.
 React can do fast and efficient DOM manipulation and maintain consistency.
 
@@ -55,7 +70,24 @@ They are normal JS utility functions.
 - useState()
 - useEffect()
 
-Whenever a state variable changes REACT rerenders the component.
+Whenever a state variable changes REACT re-renders the component.
 
 Hooks, including useState, can only be used within the body of a functional component or within
 other custom hooks.
+
+React VirtualDOM is nothing but an object (with nesting) that acts as a representation of the actual DOM.
+
+How updating state causes a rerender ?
+State Mutation:
+When you call setXYZ(newValue), React updates the state variable restaurants to the new value (newValue)
+that you provided.
+
+Reconciliation:
+After the state variable is updated, React performs a process called reconciliation.
+During reconciliation, React compares the current virtual DOM of the component with the previous virtual
+DOM snapshot to identify the differences (or "diffs").
+
+Render Phase:
+Once the differences are identified, React re-renders the component with the updated state value.
+
+

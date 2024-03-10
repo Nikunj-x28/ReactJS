@@ -1,0 +1,49 @@
+Tasks
+Update when scroll (feature)
+Making cards consistent  (UI) 
+
+
+CORS
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate
+any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.
+CORS also relies on a mechanism by which browsers make a "preflight" request to the server hosting the
+cross-origin resource, in order to check that the server will permit the actual request. In that preflight,
+the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
+If the server's CORS policy does not allow the cross-origin request, the browser will block the request and
+generate a CORS error, which is typically visible in the browser's developer console.
+The CORS proxy cannot override the restrictions imposed by the server itself. 
+
+
+REACT-ROUTER DOM LIBRARY 
+In React, a route refers to a mapping between a URL path and a React component. 
+Here's how routes work in React:
+
+Setting Up Routes: First, you need to define your routes. You specify which component should be shown for each route. For example, you might have a route for the homepage, another for a contact page, and so on.
+
+Navigating Between Routes: You use links (like <a> tags in HTML) to navigate between different routes. In React, you typically use a special component called <Link> from a library like React Router. When you click on a link, React Router changes the URL in the browser, triggering the display of the corresponding component for that route.
+
+Route Matching: When the URL changes, React Router looks at the defined routes and matches the current URL to one of those routes. If there's a match, React Router shows the component associated with that route. If there's no match, it might show a 404 error page or a default component.
+
+
+CLIENT SIDE ROUTING (vs SERVER SIDE ROUTING)
+React Router enables "client side routing".
+In traditional websites, the browser requests a document from a web server, downloads and evaluates CSS and JavaScript assets, and renders the HTML sent from the server. When the user clicks a link, it starts the process all over again for a new page.
+
+Client side routing allows your app to update the URL from a link click without making another request for another document from the server. Instead, your app can immediately render some new UI and make data requests with fetch to update the page with new information.
+
+This enables faster user experiences because the browser doesn't need to request an entirely new document or re-evaluate CSS and JavaScript assets for the next page. It also enables more dynamic user experiences with things like animation.
+
+Client side routing is enabled by creating a Router and linking/submitting to pages with Link and <Form>.
+Single Page Applications (SPAs): Client-side routing is commonly used in SPAs where the initial HTML page is loaded once, and subsequent navigation and content updates are handled dynamically by JavaScript running in the browser.
+
+
+STEPS IN CLIENT SIDE ROUTING
+When a user clicks on a Link component, React Router intercepts the click event, prevents the default browser behavior (i.e., full page reload), and instead updates the URL in the browser's address bar and renders the corresponding component for the new route.
+
+Updating the URL: Instead of performing a full-page reload, the client-side routing framework updates the URL in the browser's address bar using the HTML5 History API (history.pushState() or history.replaceState()). This change in the URL is reflected in the browser's history stack.
+
+Rendering Components: After updating the URL, the routing framework determines which component(s) should be rendered based on the new URL. It renders the appropriate component(s) in the browser without reloading the entire page.
+
+
+
+

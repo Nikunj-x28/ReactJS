@@ -1,0 +1,69 @@
+Why React is fast ?
+= Because of its diffing (Fibre) algo which does very efficient DOM manipulation.
+
+
+Tell me with this example 
+Upon a button click  react has to render a new div between two already existing divs
+after updating the real DOM what steps the browser will take to reflect the new changes
+and how different it would have been from a full page reload explain in depth
+
+ChatGPT
+Sure, let's break down the steps involved when React renders a new <div> between two existing <div> elements
+upon a button click, and how it differs from a full page reload:
+
+React Update Process:
+
+a. User Interaction: The user clicks a button triggering a state change or an event handler function in React.
+
+b. State/Props Update: React updates the state or props associated with the component that needs to render the
+   new <div>.
+
+c. Virtual DOM Diffing: React performs a diffing process between the new virtual DOM (reflecting the updated
+   state/props) and the previous virtual DOM snapshot to identify the minimal changes required.
+
+d. Updating the Render Tree: React updates the render tree.In this case, it adds a new <div> between two existing
+   <div> elements.
+
+e. Layout and Painting: React updates the layout and paints the new <div> onto the screen, ensuring that it
+   appears between the existing <div> elements as intended.
+
+Browser Rendering Process (Step-by-Step):
+
+a. DOM Tree Update: The browser receives the updated DOM from React and applies the changes to the real DOM.
+   It inserts the new <div> between the two existing <div> elements.
+
+b. Reconstruction of Render Tree: If necessary, the browser reconstructs the render tree by combining the
+   updated DOM tree and CSSOM to create an updated representation of the visual hierarchy of elements on
+   the page.
+
+c. Layout Recalculation: The browser recalculates the layout to determine the size and position of elements
+   affected by the changes. Since only a specific part of the page has changed, the layout recalculation
+   is localized to the affected area.
+
+d. Painting: Finally, the browser paints the updated elements onto the screen, rendering the new <div>
+   between the existing <div> elements.
+
+
+Comparison with Full Page Reload:
+
+In the case of a full page reload:
+
+a. Network Request: The browser sends a new request to the server to fetch the entire HTML document.
+
+b. Server Processing: The server processes the request and generates a new HTML response.
+
+c. Page Unload: The browser unloads the current page, discarding its current state and all its resources.
+
+d. New Page Load: The browser receives the new HTML response from the server and parses it to construct a
+                  new DOM tree from scratch.
+
+e. CSS and JS Parsing: The browser also downloads and parses any linked CSS stylesheets and JavaScript files.
+
+f. Layout, Painting, and Rendering: Once the new DOM tree is constructed and CSS and JavaScript are parsed,
+   the browser recalculates the layout, performs painting, and renders the entire page from scratch.
+
+In summary, when React updates the DOM to render a new <div> between two existing <div> elements,
+the browser's rendering process involves updating the DOM tree, reconstructing the render tree,
+recalculating the layout, and painting the updated elements. This process is localized to the specific
+area of the page that has changed, resulting in a faster and more efficient rendering 
+compared to a full page reload, which involves reloading the entire page from scratch.

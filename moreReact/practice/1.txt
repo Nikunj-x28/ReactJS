@@ -1,0 +1,64 @@
+Component names should be capital cased -> good practice
+When you use JSX, you must start a tag with a capital letter to render your own custom component. 
+In other words, <Something /> is equivalent to createElement(Something), but <something /> (lowercase)
+is equivalent to createElement('something') (note it’s a string, so it will be treated as a built-in HTML tag).
+
+Vite requires us to have .jsx extension for any Component file.
+It also is a good general convention to name Component files jsx. 
+
+React codes are single page applications.
+We insert and remove content to give perception to users that there are other pages too.
+
+Fragments in react ->
+Use Fragment, or the equivalent <>...</> syntax, to group multiple elements together. You can use it to put
+multiple elements in any place where a single element can go. For example, a component can only return 
+one element, but by using a Fragment you can group multiple elements together and then return them as a group.
+
+<component/> === component()
+
+{} in JSX = can hold variables // to be precise any evaluated expression
+
+React.createElement
+createElement lets you create a React element. It serves as an alternative to writing JSX.
+const element = createElement(type, props, ...children)
+
+
+const [counter , setCounter] = useState(5); 
+In React, the useState hook returns an array with two elements: the current state value and a function
+that allows you to update that state. 
+React takes care of re-rendering the component with the updated state when you use the state updater
+function returned by useState. The const here is simply stating that you cannot reassign a new value
+{
+    // This is not allowed
+    counter = 10;
+}
+to counter directly, but you can update its value using the provided setCounter function.
+
+VirtualDOM
+React Fibre
+Reconcialation - diff between DOM tree and VirtualDOM tree.
+
+Reconciliation is the algorithm behind what is popularly understood as the "virtual DOM." A high-level
+description goes something like this: when you render a React application, a tree of nodes that describes
+the app is generated and saved in memory. This tree is then flushed to the rendering environment —
+for example, in the case of a browser application, it's translated to a set of DOM operations.
+When the app is updated (usually via setState), a new tree is generated. The new tree is diffed with the
+previous tree to compute which operations are needed to update the rendered app.
+
+Diffing of lists is performed using keys. Keys should be "stable, predictable, and unique.
+
+The DOM is just one of the rendering environments React can render to, the other major targets being native
+iOS and Android views via React Native. (This is why "virtual DOM" is a bit of a misnomer.)
+The reason it can support so many targets is because React is designed so that reconciliation and rendering 
+are separate phases. The reconciler does the work of computing which parts of a tree have changed; the
+renderer then uses that information to actually update the rendered app.
+This separation means that React DOM and React Native can use their own renderers while sharing the same
+reconciler, provided by React core.
+
+In a UI, it's not necessary for every update to be applied immediately; in fact, doing so can be wasteful,
+causing frames to drop and degrading the user experience.
+
+If something is offscreen, we can delay any logic related to it. If data is arriving faster than the frame rate,
+we can coalesce and batch updates. We can prioritize work coming from user interactions (such as an animation
+caused by a button click) over less important background work (such as rendering new content just loaded
+from the network) to avoid dropping frames.

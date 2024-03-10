@@ -1,0 +1,78 @@
+React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML,
+but it is a bit stricter and can display dynamic information. 
+
+The Rules of JSX 
+1. Return a single root element
+= JSX looks like HTML, but under the hood it is transformed into plain JavaScript objects. You can’t return
+  two objects from a function without wrapping them into an array. This explains why you also can’t return
+  two JSX tags without wrapping them into another tag or a Fragment.
+
+2. Close all the tags 
+= JSX requires tags to be explicitly closed: self-closing tags like <img> must become <img />, and wrapping
+  tags like <li>oranges must be written as <li>oranges</li>.
+
+3. camelCase most of the things! 
+= JSX turns into JavaScript and attributes written in JSX become keys of JavaScript objects. In your own
+  components, you will often want to read those attributes into variables. But JavaScript has limitations
+  on variable names. For example, their names can’t contain dashes or be reserved words like class.
+  This is why, in React, many HTML and SVG attributes are written in camelCase. For example,class is a
+  reserved word, in React you write className instead, named after the corresponding DOM property.
+
+
+Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside a markup.
+In this situation, you can use curly braces in your JSX to open a window to JavaScript.
+1. When you want to pass a string attribute to JSX, you put it in single or double quotes.
+2. Any JavaScript expression will work between curly braces, including function calls
+
+You can only use curly braces in two ways inside JSX:
+
+1. As text directly inside a JSX tag: <h1>{name}'s To Do List</h1>
+2. As attributes immediately following the = sign.
+
+{{ and }} is not special syntax: it’s a JavaScript object tucked inside JSX curly braces.
+
+Expressions inside JSX curly braces 
+src="{baseUrl}{person.imageId}{person.imageSize}.jpg"  this wont work 
+src="{baseUrl+person.imageId+person.imageSize+'.jpg'}  this will work
+
+________________________________________________PROPS_________________________________________________________
+
+
+React components use props to communicate with each other. Every parent component can pass some information
+to its child components by giving them props. Props might remind you of HTML attributes, but you can pass
+any JavaScript value through them, including objects, arrays, and functions.
+
+Props are the information that you pass to a JSX tag. For example, className, src, alt, width, and height
+are some of the props you can pass to an <img>. The props you can pass to an <img> tag are predefined
+(ReactDOM conforms to the HTML standard). But you can pass any props to your own components.
+
+Passing props to a component:
+export default function Profile() {
+  return (
+    <Avatar
+      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
+      size={100}
+    />
+  );
+}
+
+Read props inside the child component: 
+function Avatar({ person, size }) {
+  // person and size are available here
+}
+
+
+const addValue = () => {
+    // do like this if you want to do sequential updates
+    setCounter(prevCounter => prevCounter + 1)
+    setCounter(prevCounter => prevCounter + 1 )
+    setCounter(prevCounter => prevCounter + 5)
+    setCounter(prevCounter => prevCounter + 1)
+
+    // this is not good this will cause trouble 
+    setCounter(Counter + 1)
+    setCounter(Counter + 1 )
+    setCounter(Counter + 5)
+    setCounter(Counter + 1)
+    //
+}
