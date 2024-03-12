@@ -29,6 +29,7 @@
     height:400px;
     padding:5px;
     background-color:#FBEAFF ;
+    text-decoration: none;
 }
 .res-card:hover{
     border: 1px solid black;
