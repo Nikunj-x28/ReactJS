@@ -72,3 +72,27 @@ export default function Form() {
     });
   }
 }
+
+React, keeps a track record of all its virtual DOM. Whenever a change happens, all the components are rendered
+and this new virtual DOM is then compared with the old virtual DOM. Only the differences found are then
+reflected in the original DOM.
+
+So, it’s obvious from the statement that if we mutate the state directly, it will change the reference of the
+state in the previous virtual DOM as well. So, React won’t be able to see that there is a change of the state
+and so it won’t be reflected in the original DOM until we reload.
+( during a reload or initial render in React, the latest virtual DOM (Document Object Model) is used to 
+render the UI.)
+
+<Parent>
+  <Child1>
+  // change in state of child1 happens
+      <Child3>
+
+      </Child3>
+   </Child1>
+   <Child2>
+   </Child2>
+</Parent>
+
+When a component in React undergoes a re-render due to a state or prop change, its entire subtree will be 
+re-rendered, regardless of whether the descendants have actually changed their state or props.

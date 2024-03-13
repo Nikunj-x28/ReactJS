@@ -1,0 +1,112 @@
+class classname extends React.component{
+// extends React.component tells React it is a class
+// render method returns JSX in class based component
+//
+    render(){
+        return(
+
+        )
+    }
+}
+export default classname;
+
+// to add this class component we do
+<classname/> // ditto same
+
+//to add props
+<classname name={username}/>
+class classname extends React.component{
+    constructor(props){
+        super(props);  // compulsory to write it
+        // After calling super(props) and invoking the parent class constructor, the this.props object is 
+        // properly initialized and accessible within the subclass (child component). 
+
+    }
+    render(){
+        return(
+                // using the props
+                this.props.name  
+        )
+    }
+}
+
+// adding state
+class classname extends React.component{
+    constructor(props){
+        super(props);  
+
+    }
+    this.state = {
+        count:0,
+        name:"Hey",
+    }
+    render(){
+        // or destructure
+        const {count,name} =  this.state
+        return(
+             // direct access
+             this.state.count   
+        )
+    }
+}
+
+// updating state variable
+// lets say we want to update count and count2
+this.setState(
+    {
+        // react will only update the states that are given in this object
+        // react will find the difference between the objects(reconciliation) and render accordingly
+        count:this.state.count + 1,
+        count2:this.state.count2 + 1,
+    }
+)
+// why react gives use componentDidMount function
+to make api calls.
+why make these api calls in componentDidMount anyway?
+=> Because we want to render the component do API call then re render according to the data.
+
+// React component lifecycle
+loading the component = mounting the component
+                      = calling the functional component
+                      = new instance of class component is created (constructor is called, then render is called, then componentDidMount function is called)
+
+MOUNTING PHASE.
+Say we have this structure
+-Parent
+ -child1
+ -child2
+1. Render Phase = constructor + render methode called
+                  first render phase of all child of a parent component will happen.
+                  then the commit phase will be called for all the childs then the parents,
+                  Render phase is just doing Diffing in the Virtual DOM and it is very fast
+                  whereas the DOM manipulation is very expensive. Hence React batches the render phase.
+                  
+                  Because say we commit child1 first then child2 then when we commit parent both the childs
+                  are again commited this leads to wasteful DOM manipulation which is quite expensive.
+                  Thus React commits all of them in a single Batch.
+2. Commit Phase = React updates DOM + componentDidMount is called
+
+
+// useEffect is not equivalent to componentDidMount
+
+/* ****************************************************************
+ *
+ *
+ * ----- Mounting CYCLE -----
+ *   Constructor (dummy)
+ *   Render (dummy)
+ *       <HTML Dummy></HTML>
+ *   Component Did Mount
+ *       <API Call>
+ *       <this.setState> - State variable is updated
+ *
+ * ----- UPDATE CYCLE -----
+ *       render(API data)
+ *       <HTML (new API data)>
+ *   Component Did Update
+ *   Component Will Unmount
+ *
+ *
+ * Life Cycle Diagram Website Reference: https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+ */
+

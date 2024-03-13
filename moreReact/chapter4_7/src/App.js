@@ -59,4 +59,6 @@ const appRouter = createBrowserRouter(
   ]
 )
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// REACT render expects a component so we cannot directly write appRouter
+// RouterProvider provides route context to all the descendent components.
 root.render(<RouterProvider router={appRouter}/>)
