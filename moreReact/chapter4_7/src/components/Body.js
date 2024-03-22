@@ -1,12 +1,12 @@
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-// Now we dont need the mock data
-// import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import Filter from "./Filter";
-import { useState , useEffect } from "react";
 import { Link } from "react-router-dom";
-import { RES_URL } from "../utils/constants";
-
+import useOnlineStattus from "../utils/useOnlineStatus";
+import useRestaurants from "../utils/useRestaurants";
+import OfflinePage from "./OfflinePage";
+import useRestaurants from "../utils/useRestaurants";
 const Body =()=>{
 // useState is used to create a state variable
 // State Variable is local to that component
@@ -15,29 +15,13 @@ const Body =()=>{
     // const arr = useState(resList);
     // const [restaurants,setRestaurants] = arr;
     
-    const [restaurants,setRestaurants] = useState([]);
+    const isOnline = useOnlineStattus();
     const [filteredRestaurants,setFilteredRestaurants] = useState([]);
-    // const [searchText,setSearchText] = useState("");
-    useEffect(()=>{
-        // runs after the body is rendered
-        fetchData();
-    },[])
-    const fetchData=async ()=>{
-        const response = await fetch(
-            RES_URL
-        );
-        const resJson = await response.json();
-        setRestaurants(
-            // optional chaining
-            resJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        );
-        setFilteredRestaurants(
-            // optional chaining
-            resJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        );
-        console.log(typeof(filteredRestaurants))
-    }
-    console.log(typeof(filteredRestaurants))
+    const restaurants = useRestaurants({setFilteredRestaurants});
+    
+    if(isOnline === false)
+        return (<OfflinePage/>);
+
     return (filteredRestaurants.length === 0)?<>
          <Filter restaurants={restaurants}
             setFilteredRestaurants={setFilteredRestaurants}/>
@@ -47,7 +31,7 @@ const Body =()=>{
         <div className="body">
             <Filter restaurants={restaurants}
             setFilteredRestaurants={setFilteredRestaurants}/>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {
                     filteredRestaurants.map((restaurant)=>{
                         return(

@@ -1,16 +1,15 @@
 const Filter = ({restaurants,setFilteredRestaurants})=>{
         let searchText=""
         return(
-            <div className="filter">
-                <div className="Search">
-                    <input type="text" className="search-box"
-                    // value={searchText}
+            <div className="filter flex">
+                <div className="m-4 p-4 ">
+                    <input type="text" className="border border-solid border-black"
                     onChange={(e)=> {
-                        // setSearchText(e.target.value)
                         searchText=e.target.value;
                     }}
                     />
                     <button
+                    className="px-4 py-0.5 bg-green-200 m-2 rounded-lg"
                     onClick={()=>{
                         const updatedFilteredRestaurants = restaurants.filter((res) =>
                                 res?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
@@ -19,16 +18,17 @@ const Filter = ({restaurants,setFilteredRestaurants})=>{
                     }}
                     >Search</button>
                 </div>
-
-                <button className="back-to-home"
+                <div className="flex items-center">
+                <button className="px-4 py-0.5 bg-gray-200 m-2 rounded-lg"
                 onClick={()=>{
                     setFilteredRestaurants(restaurants);
                 }}
                 >
                   All
                 </button>
-
-                <button className="filter-btn"
+                </div>
+                <div className="flex items-center">
+                <button className="px-4 py-0.5 bg-gray-100 m-2 rounded-lg"
                   onClick={()=>{
                       const filteredList = restaurants.filter((restaurant)=>{
                         return restaurant.info.avgRating >= 4.2;
@@ -38,6 +38,7 @@ const Filter = ({restaurants,setFilteredRestaurants})=>{
                 >
                   Top Rated Restaurants
                 </button>
+                </div>
             </div>
         )
 }
