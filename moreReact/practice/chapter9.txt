@@ -1,0 +1,51 @@
+CUSTOM HOOKS
+-> Utility functions we create.
+-> To increase Modularity
+-> Increases Readability
+-> Makes it more Readable
+-> It is recommended to write "use" in front of custom Hooks
+
+CHUNKING / CODE SPLITTING / DYNAMIC BUNDLING  / LAZY LOADING / DYNAMIC IMPORT
+-> Bundling all components in a single file can be less performant.
+-> We can do code splitting and make multiple smaller bundles.
+-> This reduces loading time.
+
+-> When our code size is bloated we split the bundles and load the bundles when they are required not
+   all at once. This makes our applicaton scalable.
+   Why do we use Suspense component?
+   = React gives us the Suspense component. React is usually faster than browser loading the
+     bundle. So it doesnt see the content of the component hence it throws an error.
+     Suspense helps us to use a fallback till this component loads.
+
+/*
+
+lazy loading About page
+import {lazy , Suspense } from "react"
+
+const About = lazy(()=>{
+  import(./components/About.js)
+})
+
+in route
+element: <Suspense fallback= {} >
+                     <About/> 
+         </Suspense>
+
+*/
+If I lazy load my about page in React, what happens to my home page when the about page loads? Is the code cached in the browser, or will it reload when I go back to the home page?
+= While the code for the home page may be cached by the browser, React will still re-render components and trigger any necessary data fetching or asynchronous operations when you navigate back to the home page to ensure that the page is up to date and reflects any changes since your last visit.
+
+
+CUSTOM HOOKS
+If you have a custom fetch hook that utilizes useEffect internally, React ensures that the useEffect inside your custom hook is called only after the component using the hook has been fully rendered. This is because hooks are called in the order they appear in your component's function body, and they always run after every render.
+
+
+const [s1,setS1] = useState([GG])
+const [s2,setS2] = useState(s1)
+setS1({abvc}) -->   ONLY S1 CHANGES NOT S2
+In React, when you initialize one state variable with the value of another state variable, the initialized state variable will only hold the initial value of the other state variable. It will not automatically update when the other state variable changes.
+
+POSTCSS is a way for our PROJECT to understand Tailwind
+
+During Bundling for production only the tailwind classes used by our code will be loaded by tailwind.
+This makes tailwind very very lightweight. (it never ships unused CSS)

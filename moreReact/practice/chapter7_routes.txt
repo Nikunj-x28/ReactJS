@@ -40,11 +40,6 @@ Updating the URL: Instead of performing a full-page reload, the client-side rout
 Rendering Components: After updating the URL, the routing framework determines which component(s) should be rendered based on the new URL. It renders the appropriate component(s) in the browser without reloading the entire page.
 
 
-Tasks
-Update when scroll (feature)
-Making cards consistent  (UI) 
-veg only option in menu
-
 Bubbling
 When a route does not have an errorElement, errors will bubble up through parent routes. This lets you get as granular or general as you like.
 
