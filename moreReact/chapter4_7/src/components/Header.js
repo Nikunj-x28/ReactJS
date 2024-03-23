@@ -15,12 +15,16 @@ const Header = ()=>{
                     <li className="px-4">
                         Online Status: {isOnline ? "✅" : "🔴"}
                     </li>
-                    <li className="px-4"><Link to="./">Home</Link></li>
-                    <li className="px-4"><Link to="./about">About Us</Link></li>
-                    <li className="px-4"><Link to="./contact">Contact Us</Link></li>
-                    <li className="px-4">Cart</li>
+                    <li className="px-4 "><Link to="./">Home</Link></li>
+                    <li className="px-4 "><Link to="./about">About Us</Link></li>
+                    <li className="px-4 "><Link to="./contact">Contact Us</Link></li>
+                    <li className="px-4 ">Cart</li>
                     <button
-                    className="login-btn"
+                    className={"login-btn border-1 px-2 py-0.5 rounded-md " + 
+                    (btnName === "Login"
+                    ?"bg-gray-300"
+                    :"bg-green-300")
+                    }
                     onClick={()=>{
                         btnName === "Login"?
                         setBtnName("Logout"):

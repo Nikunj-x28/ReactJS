@@ -10,7 +10,7 @@ const RestaurantCard = ({resData})=>{
         costForTwo,
     } = resData?.info;
     return (
-        <div className="m-4 p-4 w-[250px] h-[400px] bg-gray-300">
+        <div className="m-4 p-4 w-[250px] h-[400px] bg-gray-300 rounded-md">
             <img 
             className="w-[220px] h-[200px] rounded-xl
             p-2 transition-all duration-500 hover:scale-110"
@@ -25,15 +25,21 @@ const RestaurantCard = ({resData})=>{
                 <h4 className={`text-sm ${isHovered ? 'text-yellow-600' : 'text-gray-700'} transition-colors duration-300`}>{`${avgRating} stars ✨`}</h4>
                 <h4 className={`text-sm ${isHovered ? 'text-green-600' : 'text-gray-700'} transition-colors duration-300`}>{costForTwo}</h4>
                 <h4 className={`text-sm ${isHovered ? 'text-purple-600' : 'text-gray-700'} transition-colors duration-300`}>{`${resData?.info.sla.deliveryTime}  minutes 🚀`}</h4>
-            {/* 
-            <h3>{name}</h3>
-            <h5>{cuisines.join(", ")}</h5>
-            <h4 >{`${avgRating} stars ✨`}</h4>
-            <h4>{costForTwo}</h4>
-            <h4>{`${resData?.info.sla.deliveryTime}  minutes 🚀`}</h4> 
-            */}
             </div>
         </div>
     )
 }
+// Higher order component
+const withPopularLabel = (WrappedComponent) => {
+    // Returns a component
+    return ({ resData }) => {
+        return (
+            <div>
+                <label className="absolute bg-black text-white ml-3 mt-2 p-1.5 rounded-lg">Most Popular</label>
+                <WrappedComponent resData={resData} />
+            </div>
+        );
+    };
+};
+export {withPopularLabel}
 export default RestaurantCard;

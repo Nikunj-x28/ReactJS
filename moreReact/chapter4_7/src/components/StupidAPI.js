@@ -1,35 +1,29 @@
+import RestaurantCategory from "./RestaurantCategory";
 const StupidAPI = ({resInfo,one,two})=>{
-    const {
-        name,
-        cuisines,
-        costForTwoMessage
-        // search more data in API
-        // cloudinaryImageId,
-        // avgRating,
-        // deliveryTime
-    } = resInfo?.data?.cards[one]?.card?.card?.info;
-    // console.log(one)
-    // console.log(resInfo.data.cards[one].card.card.info)
+    const { name,cuisines,costForTwoMessage } = resInfo?.data?.cards[one]?.card?.card?.info;
     const {itemCards} = resInfo?.data?.cards[two]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    
+    const categories = resInfo?.data?.cards[two]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>{
+        // cannot directly write @type
+        return c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    })
     return(
-        <div className="menu">
-            <h1>{name}</h1>
-            <h2>{cuisines.join(", ")}</h2>
-            <h2>{costForTwoMessage}</h2>
-            <h2>Menu</h2>
-            <ul>
-                {
-                    itemCards.map((item)=>{
-                            return(
-                                <li key={item.card.info.id}>
-                                {item.card.info.name} - {"Rs."}{item.card.info.price/100 ||
-                                item.card.info.defaultPrice/100}
-                                </li>
-                            )
-                    })
-                }
-            </ul>
+        <div className="text-center">
+            <h1 className="text-xl font-bold">{name}</h1>
+            <h2 className="text-gray-600">{cuisines.join(", ")}</h2>
+            <h2 className="text-gray-600">{costForTwoMessage}</h2>
+            <h2 className="text-lg font-bold">Menu</h2>
+            {/* categories accordion */}
+            {
+             categories&&categories.map((category)=>{
+                    return(
+                        <RestaurantCategory 
+                        data ={category?.card?.card}/>
+                    )
+             })
+            }
         </div>
     )    
 }
 export default StupidAPI;
+
