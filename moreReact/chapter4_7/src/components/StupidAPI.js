@@ -1,8 +1,8 @@
+import { useState } from "react";
 import RestaurantCategory from "./RestaurantCategory";
 const StupidAPI = ({resInfo,one,two})=>{
     const { name,cuisines,costForTwoMessage } = resInfo?.data?.cards[one]?.card?.card?.info;
-    const {itemCards} = resInfo?.data?.cards[two]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
-    
+    const [showItems,setShowItems] = useState(null);
     const categories = resInfo?.data?.cards[two]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>{
         // cannot directly write @type
         return c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
@@ -15,12 +15,13 @@ const StupidAPI = ({resInfo,one,two})=>{
             <h2 className="text-lg font-bold">Menu</h2>
             {/* categories accordion */}
             {
-             categories&&categories.map((category)=>{
-                    return(
-                        <RestaurantCategory 
+             categories&&categories.map((category)=>
+                        <RestaurantCategory
+                        key={category?.card?.card?.title} 
+                        showItems={showItems}
+                        setShowItems={setShowItems}
                         data ={category?.card?.card}/>
-                    )
-             })
+             )
             }
         </div>
     )    

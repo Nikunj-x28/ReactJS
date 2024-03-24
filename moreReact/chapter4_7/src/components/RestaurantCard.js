@@ -35,7 +35,8 @@ const withPopularLabel = (WrappedComponent) => {
     return ({ resData }) => {
         return (
             <div>
-                <label className="absolute bg-black text-white ml-3 mt-2 p-1.5 rounded-lg">Most Popular</label>
+                <label className="absolute bg-black text-white ml-3 mt-2 p-1.5 rounded-lg
+                z-10">Most Popular</label>
                 <WrappedComponent resData={resData} />
             </div>
         );
