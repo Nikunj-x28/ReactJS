@@ -7,6 +7,7 @@ const StupidAPI = ({resInfo,one,two})=>{
         // cannot directly write @type
         return c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     })
+    console.log(categories)
     return(
         <div className="text-center">
             <h1 className="text-xl font-bold">{name}</h1>

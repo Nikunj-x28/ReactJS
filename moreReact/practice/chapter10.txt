@@ -1,19 +1,33 @@
 Managing Data Layer
 
 1. Higher Order component
-It is a function that takes a component enhances it and returns the component.
+=  It is a function that takes a component enhances it and returns the component.
 
 2. Lifting State Up
 
 3. Controlled component
 =  Parent has state and that state has some control over this component
 
+4. Props Drilling
+=  Passing data to descendents more efficiently.
+
+5. React Context
+=  Global place where our data is kept. We can get this data anywhere in our app. 
+
+6. Redux vs Context
+=  Context works for small and mid scale. But in large scale apps redux is more
+   suitable.
+
+useContext 
+<Usercontext.consumer></Usercontext.consumer>
+
+<UserContext.Provider value={}>
+    //wrap around the portion where we want the context to take a dynamic value
+</UserContext.Provider>
 
 
-
-
+why ? useContext(contextname)
 
 
 Tasks
-Update when scroll (feature)
 veg only option in menu

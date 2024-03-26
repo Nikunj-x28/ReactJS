@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import Body from "./components/Body";
 import Header from "./components/Header.js";
@@ -7,6 +7,7 @@ import Contact from "./components/Contact.js";
 import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import {createBrowserRouter , RouterProvider , Outlet} from "react-router-dom";
+import UserContext from "./utils/UserContext.js";
 /*
 Header
 -logo
@@ -22,14 +23,16 @@ Footer
 - Address
 - Contact
 */
-
 const AppLayout = ()=>{
+    const [userName,setUserName] = useState();
     return(
+      <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
         <div className="app">
             <Header/>
             {/* this outlet is basically replaced by the respective children */}
             <Outlet/>
         </div>
+      </UserContext.Provider>
     )
 }
 const appRouter = createBrowserRouter(

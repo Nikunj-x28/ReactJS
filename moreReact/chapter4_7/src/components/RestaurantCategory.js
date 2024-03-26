@@ -19,7 +19,6 @@ const RestaurantCategory = ({showItems,setShowItems,data})=>{
                     ?<span >🔽</span>
                     :<span >▶️</span>
                     }
-                    
                 </div>
                 {/* Item values */}
                 {

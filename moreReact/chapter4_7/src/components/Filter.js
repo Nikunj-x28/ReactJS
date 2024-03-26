@@ -1,5 +1,8 @@
+import UserContext from "../utils/UserContext";
+import {useContext} from "react";
 const Filter = ({restaurants,setFilteredRestaurants})=>{
         let searchText=""
+        const {loggedInUser,setUserName} = useContext(UserContext);
         return(
             <div className="filter flex">
                 <div className="m-4 p-4 ">
@@ -38,6 +41,14 @@ const Filter = ({restaurants,setFilteredRestaurants})=>{
                 >
                   Top Rated Restaurants
                 </button>
+                </div>
+                <div className="m-4 p-4 flex items-center rounded-md">
+                    <input type="text" className="border border-solid border-black"
+                    value={loggedInUser}
+                    onChange={(e)=> {
+                        setUserName(e.target.value)
+                    }}
+                    />
                 </div>
             </div>
         )
