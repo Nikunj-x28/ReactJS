@@ -96,3 +96,18 @@ render the UI.)
 
 When a component in React undergoes a re-render due to a state or prop change, its entire subtree will be 
 re-rendered, regardless of whether the descendants have actually changed their state or props.
+
+const addValue = () => {
+    // do like this if you want to do sequential updates
+    setCounter(prevCounter => prevCounter + 1)
+    setCounter(prevCounter => prevCounter + 1 )
+    setCounter(prevCounter => prevCounter + 5)
+    setCounter(prevCounter => prevCounter + 1)
+
+    // this is not good this will cause trouble 
+    setCounter(Counter + 1)
+    setCounter(Counter + 1 )
+    setCounter(Counter + 5)
+    setCounter(Counter + 1)
+    //
+}

@@ -1,5 +1,3 @@
-Props in react => something we can pass to a component/argumnets to a function
-
 Config driven UI
 A "config-driven UI" refers to a user interface (UI) design approach where the layout, appearance,
 behavior, and other aspects of the UI are largely determined by configuration data rather than hardcoded
@@ -74,8 +72,6 @@ Whenever a state variable changes REACT re-renders the component.
 
 Hooks, including useState, can only be used within the body of a functional component or within
 other custom hooks.
-
-React VirtualDOM is nothing but an object (with nesting) that acts as a representation of the actual DOM.
 
 How updating state causes a rerender ?
 State Mutation:

@@ -27,3 +27,14 @@ Why you cannot call `use` hooks within conditionals or loops ?
 = We are dealing with a cursor pointing to a set of arrays, if you change the order of the calls within render,
   the cursor will not match up to the data and your use calls will not point to the correct data or handlers.
 
+const [counter , setCounter] = useState(5); 
+In React, the useState hook returns an array with two elements: the current state value and a function
+that allows you to update that state. 
+React takes care of re-rendering the component with the updated state when you use the state updater
+function returned by useState. The const here is simply stating that you cannot reassign a new value
+{
+    // This is not allowed
+    counter = 10;
+}
+to counter directly, but you can update its value using the provided setCounter function.
+
