@@ -1,5 +1,16 @@
 import { CDN_URL } from "../utils/constants";
+import { addItem } from "../utils/cartslice";
+import {useDispatch} from "react-redux";
+
 const ItemList = ({items})=>{
+
+    const dispatch = useDispatch();
+    const handleAddItem = (item)=>{
+        // dispatch an action
+        dispatch(addItem(item));
+        // action object is created by redux
+        // pizza is action.payload
+    }
     return(
         <>
             {
@@ -22,7 +33,9 @@ const ItemList = ({items})=>{
                                 <div className="relative h-32">
                                     <img className="h-full w-full object-cover" src={CDN_URL+item.card.info.imageId} alt="image"/>
                                     <div className="absolute bottom-0 right-0 mb-2 mr-2">
-                                        <button className="px-2 py-1 bg-white shadow-lg text-sm">Add +</button>
+                                        <button className="px-2 py-1 bg-white shadow-lg text-sm"
+                                        onClick={()=>{handleAddItem(item)}}
+                                        >Add +</button>
                                     </div>
                                 </div>
                             </div>

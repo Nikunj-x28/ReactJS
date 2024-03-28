@@ -1,0 +1,70 @@
+Alternative - Zustand
+REDUX TOOLKIT(RTK) - Less Complicated Version of REDUX
+
+do something -> dispatches an action -> calls a function -> this function acts on the REDUX store slice.
+This function is known as a reducer.
+
+data stored in REDUX onject store -> selector -> use anywhere
+this process is called subscribing to the store. The data is now in sync with the store.
+
+
+# REDUX TOOLKIT
+- Install @reduxjs/toolkit and react-redux
+- Build Our own store
+- Connect our store to our app
+- Create a cart slice
+- dispatch(action)
+- selector
+
+
+REDUX BTS
+1. make sure you subscribe to the right portion of the store.
+
+ // this is good. Only required slice is subscribed
+ const cartItems = useSelector((store) => store.cart.items);
+
+ // this is bad
+ // whenever anything changes in the store the whole component reloads.
+ const store= useSelector((store) => store);
+ const cartItems = store.cart.items
+
+2. reducer vs reducers keyword
+=  when you have multiple smaller reducer(s) we use keyword reducers.
+
+        reducers:{
+            addItem:(state,action)=>{
+                       state.items.push(action.payload)
+            },
+            removeItem:(state,action)=>{
+                state.items.pop();
+            },
+            clearCart:(state,action)=>{ //no need to write action here tbh
+                state.items.length=0;
+            }
+        }
+
+        reducer:{
+        cart:cartReducer,
+        },
+  
+3. REDUX used to say dont modify state directly. But now we have to mutate the state mandatorily.
+   But behind the scenes REDUX still does use Immutable state. RTK uses immer library bts.
+
+
+4. Understand References in Reducers 
+reducers:{
+            addItem:(state,action)=>{
+                       state.items.push(action.payload)
+            },
+            removeItem:(state,action)=>{
+                state.items.pop();
+            },
+            clearCart:(state,action)=>{ 
+                state = [] // this wont work as we are just changing the reference of state variable.
+                state.items.length=0;
+                // doing this also gives the same result.
+                return { items : [] }
+            }
+}
+
+5. RTK Query.

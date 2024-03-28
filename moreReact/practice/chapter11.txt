@@ -1,0 +1,66 @@
+Managing Data Layer
+
+1. Higher Order component
+=  It is a function that takes a component enhances it and returns the component.
+   HOCs enable you to abstract common logic out of components and apply it across multiple components in
+   your application.
+
+2. Lifting State Up
+=  "Lifting State Up" is a concept in React where you move the state from multiple child components to their
+    closest common ancestor or parent component.
+
+3. 
+A Controlled Component is one that takes its current value through props and notifies changes through callbacks
+like onChange. A parent component "controls" it by handling the callback and managing its own state and passing
+the new values as props to the controlled component. You could also call this a "dumb component".
+A Uncontrolled Component is one that stores its own state internally, and you query the DOM using a ref to
+find its current value when you need it. This is a bit more like traditional HTML.
+
+Most native React form components support both controlled and uncontrolled usage:
+// Controlled:
+<input type="text" value={value} onChange={handleChange} />
+
+// Uncontrolled:
+<input type="text" defaultValue="foo" ref={inputRef} />
+// Use `inputRef.current.value` to read the current value of <input>
+
+The truth is we are supposed to use controlled components in most of the scenarios and as much as possible.
+
+
+4. Props Drilling
+=  Props drilling, also known as "prop passing" or "component composition", refers to the process of passing
+   data from a parent component to a deeply nested child component through intermediate components. I
+
+5. React Context
+=  It allows you to create a global data store that can be accessed by any component in the tree, regardless
+   of how deep it is nested.
+
+Context lets you write components that “adapt to their surroundings” and display themselves differently
+depending on where (or, in other words, in which context) they are being rendered.
+How context works might remind you of CSS property inheritance. In CSS, you can specify color: blue for a
+<div>, and any DOM node inside of it, no matter how deep, will inherit that color unless some other DOM node
+in the middle overrides it with color: green. Similarly, in React, the only way to override some context
+coming from above is to wrap children into a context provider with a different value.
+In CSS, different properties like color and background-color don’t override each other. You can set all
+ <div>’s color to red without impacting background-color. Similarly, different React contexts don’t override 
+each other. Each context that you make with createContext() is completely separate from other ones, and ties
+together components using and providing that particular context. One component may use or provide many
+different contexts without a problem.
+
+
+useContext does the same as below
+<Usercontext.consumer></Usercontext.consumer>
+
+<UserContext.Provider value={}>
+    //wrap around the portion where we want the context to take a dynamic value
+</UserContext.Provider>
+
+
+In React, when you create a custom context using createContext(), you get access to
+two key components: Provider and Consumer. These components are provided as properties of the context object'
+returned by createContext().
+
+
+Context values are memoized by React, meaning that components consuming context data will only re-render
+when the context value they depend on changes. This memoization helps optimize performance by preventing
+unnecessary re-renders of components that don't rely on the context data.

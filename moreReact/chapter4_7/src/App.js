@@ -5,9 +5,12 @@ import Header from "./components/Header.js";
 import About from "./components/About.js";
 import Contact from "./components/Contact.js";
 import Error from "./components/Error.js";
+import Cart from "./components/Cart.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import {createBrowserRouter , RouterProvider , Outlet} from "react-router-dom";
 import UserContext from "./utils/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 /*
 Header
 -logo
@@ -26,13 +29,15 @@ Footer
 const AppLayout = ()=>{
     const [userName,setUserName] = useState();
     return(
-      <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
-        <div className="app">
-            <Header/>
-            {/* this outlet is basically replaced by the respective children */}
-            <Outlet/>
-        </div>
-      </UserContext.Provider>
+      <Provider store={appStore}>
+        <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
+          <div className="app">
+              <Header/>
+              {/* this outlet is basically replaced by the respective children */}
+              <Outlet/>
+          </div>
+        </UserContext.Provider>
+      </Provider>
     )
 }
 const appRouter = createBrowserRouter(
@@ -52,6 +57,10 @@ const appRouter = createBrowserRouter(
         {
           path:"/contact",
           element:<Contact/>
+        },
+        {
+          path:"/cart",
+          element:<Cart/>
         },
         {
           path:"/restaurant/:resId",
