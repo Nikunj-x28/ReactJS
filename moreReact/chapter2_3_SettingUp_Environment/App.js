@@ -1,6 +1,7 @@
 // normal browser scripts cannot have this import
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Index from "./Index";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // JSX => React.createElement => ReactElement-JS Object => HTMLElement(render)
@@ -28,6 +29,7 @@ const HeadingComponent = () => (
 const Title =()=>(
     <h1>
         no no no 
+        <Index/>
     </h1>
 );
 
@@ -82,4 +84,4 @@ const Test = () => (
 // syntax of rendering a component
 // 1) root.render(HeadingComponent())
 // 2) root.render(<HeadingComponent/>)
-root.render(Fun2)
+root.render(<Title/>)
