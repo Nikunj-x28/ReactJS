@@ -6,7 +6,7 @@ import Error from "./components/Error.jsx";
 import Home from "./pages/Home.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
-import UserContext from "./context/UserContext.js";
+import { Socketcontext } from "./context/SocketContext";
 function App() {
   const Homepage = ()=>{
     return(
@@ -24,20 +24,23 @@ function App() {
         </div>
     );
   }
-  const [userData,setUserData] = useState();
+  // socket context
+  const [currentFriendId, setCurrentFriendId] = useState(null);
+  const [unreadMessages, setUnreadMessages] = useState([]);
+  const [socket,setSocket]= useState(null)
   return (
     <>
-      <UserContext.Provider value={{userData,setUserData}}>
+     <Socketcontext.Provider value={{socket,setSocket,unreadMessages,setUnreadMessages,currentFriendId,setCurrentFriendId}}>
           <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Homepage />} case />
+                <Route path="/" element={<Homepage />}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="*" element={<Error />} /> 
             </Routes>
-        </BrowserRouter> 
-      </UserContext.Provider>
+        </BrowserRouter>
+      </Socketcontext.Provider> 
     </>
   )
 }

@@ -1,12 +1,10 @@
-import { useState,useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "../utils/constants";
-import UserContext from "../context/UserContext";
 
 const Login = () => {
     const navigate = useNavigate(); 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const {userData , setUserData} = useContext(UserContext);
     useEffect(()=>{
         if(isLoggedIn) navigate('/home');
     },[isLoggedIn])
@@ -15,7 +13,6 @@ const Login = () => {
         const email = e.target[0].value;
         const password = e.target[1].value;
         const data = { email, password };
-
         try {
             const response = await fetch(loginAPI, {
                 method: 'POST',
@@ -29,9 +26,10 @@ const Login = () => {
                 throw new Error('Network response was not ok');
             } else {
                 const responseData = await response.json();
-                //console.log('Response:', responseData);
-                setUserData(responseData)
-                setIsLoggedIn(true); 
+                // Store the token in local storage
+                localStorage.setItem('token', responseData.data.accessToken);
+                localStorage.setItem('userData', JSON.stringify(responseData));
+                setIsLoggedIn(true);
             }
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);

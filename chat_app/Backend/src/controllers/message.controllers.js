@@ -6,7 +6,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { getReceiverSocketId, io } from "../socket/socket.js";
 
 const sendMessage = asyncHandler(async (req, res) => {
-
+  console.log("SendMessage API Called");
   const senderId = req.user._id;
   const receiverId = req.params.id;
 
@@ -45,6 +45,7 @@ const sendMessage = asyncHandler(async (req, res) => {
 
 })
 
+// We have already written this controller in user.controller getOneUserConversation
 const getMessage = asyncHandler(async (req, res) => {
   const friendId = req.params.friendId;
   const myId = req.user._id.toString();
@@ -61,6 +62,5 @@ const getMessage = asyncHandler(async (req, res) => {
     new ApiResponse(200, conversation, 'Chat history fetched successfully!!')
   )
 })
-
 
 export { sendMessage, getMessage };

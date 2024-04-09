@@ -1,9 +1,7 @@
 import threeDots from "../assets/three_dots.png"
 import videoCall from "../assets/video_call.png"
-import UserContext from "../context/UserContext"
-import { useContext } from "react"
 const MessageNavBar = ()=>{
-    const {userData} = useContext(UserContext)
+    const userData = localStorage.getItem("userData")
     return(
         <div className="flex justify-between items-center  bg-purple-500 text-white h-[10%]">
             <h1 className="pl-4">{userData?.data?.User?.fullName}</h1>

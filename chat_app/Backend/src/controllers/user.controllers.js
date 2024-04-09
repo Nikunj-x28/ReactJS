@@ -3,6 +3,7 @@ import { ApiError } from '../utils/ApiError.js';
 import { User } from '../models/user.model.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import jwt from 'jsonwebtoken';
+import { Conversation } from '../models/conversation.model.js';
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -123,8 +124,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // Cookie will only be modifiable at backend not in the frontend
   const options = {
-    httpOnly: true,
-    secure: true
+    httpOnly: false,
+    secure: false
   }
 
   return res
@@ -155,18 +156,18 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
   )
 
-  const options = {
-    httpOnly: true,
-    secure: true
-  }
+  // const options = {
+  //   httpOnly: true,
+  //   secure: true
+  // }
 
-  return res
-    .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(
-      new ApiResponse(200, {}, "User logout Successfully!!")
-    )
+  // return res
+  //   .status(200)
+  //   .clearCookie("accessToken", options)
+  //   .clearCookie("refreshToken", options)
+  //   .json(
+  //     new ApiResponse(200, {}, "User logout Successfully!!")
+  //   )
 })
 
 const getAllUserData = asyncHandler(async (req, res) => {
@@ -177,4 +178,31 @@ const getAllUserData = asyncHandler(async (req, res) => {
   )
 })
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken, getAllUserData }
+const getOneUserConversation = asyncHandler(async (req, res) => {
+  console.log("GetOneUserConversation is called");
+  const receiverId = req.params.friendId;
+  const myId = req.user._id;
+  
+  const conversation = await Conversation.findOne({ participants: { $all: [myId, receiverId] } })
+    .populate('messages')
+    .exec();
+
+  if (!conversation) {
+    return res.status(200).json(new ApiResponse(200, [], 'These users have no chat history!!'));
+  }
+
+  let messages = conversation.messages;
+
+  messages.sort((a, b) => {
+    const createdAtA = new Date(a.createdAt).getTime();
+    const createdAtB = new Date(b.createdAt).getTime();
+    return createdAtA - createdAtB;
+  });
+
+  return res.status(200).json(
+    new ApiResponse(200, messages, 'Chat history fetched successfully!!')
+  );
+});
+
+
+export { registerUser, loginUser, logoutUser, refreshAccessToken, getAllUserData, getOneUserConversation }

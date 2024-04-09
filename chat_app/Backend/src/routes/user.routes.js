@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginUser, registerUser, logoutUser, getAllUserData } from "../controllers/user.controllers.js";
+import { loginUser, registerUser, logoutUser, getAllUserData, getOneUserConversation } from "../controllers/user.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { getMessage, sendMessage } from "../controllers/message.controllers.js";
 
@@ -12,5 +12,6 @@ router.route('/logout').post(verifyJWT, logoutUser);
 router.route('/sendMessage/:id').post(verifyJWT, sendMessage);
 router.route('/getAllUserData').post(verifyJWT, getAllUserData);
 router.route('/getMessage/:friendId').post(verifyJWT, getMessage);
+router.route('/getOneUserConversation/:friendId').post(verifyJWT, getOneUserConversation);
 
 export default router;

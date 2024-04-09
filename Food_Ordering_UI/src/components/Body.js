@@ -14,7 +14,6 @@ const Body =()=>{
     // following is also a valid syntax
     // const arr = useState(resList);
     // const [restaurants,setRestaurants] = arr;
-    
     const isOnline = useOnlineStattus();
     const [filteredRestaurants,setFilteredRestaurants] = useState([]);
     const restaurants = useRestaurants({setFilteredRestaurants});

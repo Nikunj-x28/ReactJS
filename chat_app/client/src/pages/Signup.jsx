@@ -1,12 +1,14 @@
 import { signupAPI } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../context/UserContext";
-import { useState, useContext } from "react";
+import { useState , useEffect } from "react";
+import Add from "../assets/img/add.png"
 
 const Signup = ()=>{
     const navigate = useNavigate(); 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const {setUserData} = useContext(UserContext);
+    useEffect(()=>{
+        if(isLoggedIn) navigate('/home');
+    },[isLoggedIn])
     const handleSubmit =async (e)=>{
         e.preventDefault()
         const fullName = e.target[0].value;
@@ -31,22 +33,16 @@ const Signup = ()=>{
               throw new Error('Network response was not ok');
             }else{
                 const responseData = await response.json();
-                // console.log('Response:', responseData);
-                setIsLoggedIn(true);
-                setUserData(responseData)
+                // Store the token in local storage
+                localStorage.setItem('token', responseData.data.accessToken);
+                localStorage.setItem('userData', JSON.stringify(responseData));
+                setIsLoggedIn(true); 
             }
           } 
           catch (error) {
             console.error('There was a problem with your fetch operation:', error);
         }
     };
-
-    // If isLoggedIn is true, redirect to the home page
-    if (isLoggedIn) {
-        navigate('./home');
-        // *** implment loader at place of null
-        return null; 
-    }
 
     return(
         <div className="bg-blue-400 flex justify-center items-center h-screen">
@@ -63,7 +59,7 @@ const Signup = ()=>{
                         <div className="mb-4">
                             <input type="password" placeholder="Password" className="w-full py-2 px-4 border rounded-lg" />
                         </div>
-                        {/* <div className="mb-4">
+                        <div className="mb-4">
                             <label htmlFor="fileInput" 
                                 className="flex justify-center border border-gray-300 rounded p-4 hover:border-blue-500
                                 cursor-pointer">
@@ -71,13 +67,12 @@ const Signup = ()=>{
                                 <span className="text-gray-400">Upload Image</span>
                             </label>
                             <input type="file" id="fileInput" className="hidden" accept=".jpg, .jpeg, .png"/>
-                        </div> */}
+                        </div> 
                         <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg mb-4 hover:bg-blue-700 transition duration-300">
                             Sign Up
                         </button>
                     </form>
                     <p className="text-sm">Already have an account? <Link to=".././Login" className="text-blue-600 cursor-pointer">Login</Link></p>
-                    {/* {success && <span className="text-blue-400">You signed up successfully</span>} */}
                 </div>
         </div>
     ) 

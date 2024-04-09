@@ -1,23 +1,30 @@
-import { getAllUserData } from "../utils/constants";
-import { useEffect, useContext} from "react";
-import UserContext from "../context/UserContext.js"
-const ChatMenu = ()=>{
-    const {userData} = useContext(UserContext)
+import { getAllUserData } from "../utils/constants.js";
+import { useEffect, useContext, useState} from "react";
+import User from "./User.jsx";
+import { Socketcontext } from "../context/SocketContext.js";
+import { highlightUser } from "./User.jsx";
+const ChatMenu = ({userName})=>{
+    const {unreadMessages} = useContext(Socketcontext);
+    const [friends,setFriends] = useState([])
+    const UserhasMessaged = highlightUser(User);
     useEffect(()=>{
         const loadChat = async ()=>{
             try {
+                const accessToken = localStorage.getItem('token');
                 const response = await fetch(getAllUserData, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization':`Bearer ${accessToken}`
                     },
                 });
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 } else {
-                    console.log("it worked ")
+                    // console.log("it worked ")
                     const responseData = await response.json();
-                    console.log('Response:', responseData);
+                    setFriends(responseData.data) 
+                    // console.log('Response:', responseData);
                 }
             } catch (error) {
                 console.error('There was a problem with your fetch operation:', error);
@@ -27,7 +34,31 @@ const ChatMenu = ()=>{
     },[])
     return(
         <div className="overflow-y-auto max-h-96">
-            
+            {   
+                userName === ""
+                ? friends.map((friend) => (
+                    <div key={friend._id}>
+                        {
+                            unreadMessages.includes(friend._id)
+                            ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
+                            :<User fullname={friend.fullName} id={friend._id}/>
+                        }
+                    </div>
+                ))
+                : friends
+                      .filter((friend) =>
+                          friend.fullName.toLowerCase().includes(userName.toLowerCase())
+                      )
+                      .map((friend) => (
+                          <div key={friend._id}>
+                              {
+                                unreadMessages.includes(friend._id)
+                                ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
+                                :<User fullname={friend.fullName} id={friend._id}/>
+                              }
+                          </div>
+                ))
+            }
         </div>
     )
 }
