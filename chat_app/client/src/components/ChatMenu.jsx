@@ -21,10 +21,8 @@ const ChatMenu = ({userName})=>{
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 } else {
-                    // console.log("it worked ")
                     const responseData = await response.json();
                     setFriends(responseData.data) 
-                    // console.log('Response:', responseData);
                 }
             } catch (error) {
                 console.error('There was a problem with your fetch operation:', error);

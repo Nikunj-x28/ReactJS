@@ -7,12 +7,12 @@ const User = ({fullname,id})=>{
     const {setMessages,clicked,setClicked} = useContext(MessageContex)
     const {setCurrentFriendId} = useContext(Socketcontext)
     const handleClick =()=>{
+        // console.log(id)
         setClicked(id)
     }
     useEffect(()=>{
         if(clicked!==id) return;
         const caller = async ()=>{
-                        console.log("clicked"+id)
                         try {
                             const accessToken = localStorage.getItem("token")
                             const response = await fetch(getOneUserConversation+id, {
@@ -26,7 +26,6 @@ const User = ({fullname,id})=>{
                                 throw new Error('Network response was not ok');
                             } else {
                                 const responseData = await response.json();
-                                // console.log('Response:', responseData);
                                 setMessages(responseData.data)
                                 setCurrentFriendId(id)
                                 setClicked(false)

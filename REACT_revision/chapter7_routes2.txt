@@ -45,5 +45,11 @@ Navigate Function: A function provided by React Router for programmatic navigati
 These pieces of information collectively provide the context for routing within a React application. They allow components to respond dynamically to changes in the URL, access parameters from the URL, and navigate between different routes programmatically.
 
 
+To implement lazy loading, simply go to App.js and wrap our routes with the Suspense component, along with a fallback props that are rendered on the screen until the component loads.
 
+The useParams hook from React Router DOM allows you to access dynamic parameters from the URL in your components. It works by extracting the parameters specified in the URL path pattern defined in your Route component.
+
+For example, consider the following route definition:
+<Route path="/user/:userId" element={<UserProfile />} />
+In this route, :userId is a dynamic parameter specified in the URL path. When the URL matches this pattern, React Router will extract the value provided for :userId in the actual URL and make it available in the useParams hook.
 

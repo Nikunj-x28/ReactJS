@@ -1,18 +1,18 @@
 import {useNavigate } from "react-router-dom"
-// import { useContext } from "react";
-// import { Socketcontext } from "../context/SocketContext";
+import { useContext } from "react";
+import { Socketcontext } from "../context/SocketContext";
 const NavBar = ()=>{
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
-    // const {socket} = useContext(Socketcontext)
+    const {socket} = useContext(Socketcontext)
 
     // console.log(userData)
     const navigate = useNavigate();
     const handleClick = ()=>{
         localStorage.removeItem("userData");
         localStorage.clear()
-        // socket.off('newMessage');
-        // socket.disconnect();
+        socket.off('newMessage');
+        socket.disconnect();
         navigate('/')
     }
     return(

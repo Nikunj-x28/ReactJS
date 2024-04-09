@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import { connectSocket } from "../utils/constants";
 const Home = () => {
 
-    const {socket,setSocket,setUnreadMessages} = useContext(Socketcontext);
+    const {socket,setSocket,setUnreadMessages,currentFriendId} = useContext(Socketcontext);
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
         
@@ -22,6 +22,7 @@ const Home = () => {
             else{
                 // Event listener for incoming messages
                 socket.on('newMessage', (data) => {
+                    console.log("Message Came")
                     // Check if the message is from the currently selected friend
                     if (data.senderId !== currentFriendId) {
                         // Update the list of unread messages if the sender is not the current friend
@@ -32,16 +33,13 @@ const Home = () => {
                             return prevUnreadMessages;
                         });
                     } else {
-                        setMessages((prevMessages) => [...prevMessages, data.message]);
+                        console.log("In socket ",currentFriendId)
+                        console.log(data.message)
+                        setMessages([...messages, data]);
                     }
                 });
-                // Cleanup function
-                return () => {
-                        socket.off('newMessage');
-                        socket.disconnect();
-                }
             }
-    }, [socket]);
+    }, [socket,currentFriendId]);
 
     return (
             <MessageContext.Provider value={{ messages, setMessages ,clicked,setClicked}}>

@@ -7,8 +7,6 @@ const MessageList = () => {
 
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
-    console.log(userData)
-    console.log("messages: " + messages)
     useEffect(() => {
         // Scroll to the bottom of the message list
         if (messageListRef.current) {
@@ -19,13 +17,14 @@ const MessageList = () => {
     return (
         <div className="h-[80%] overflow-y-auto" ref={messageListRef}>
             {
-                messages.map((message)=>{
+                // add unqiue message id at backend
+                messages.map((message,index)=>{
                         return (
                             message.senderId===userData.data.User._id
-                            ?<div className="flex justify-end" key={message.id}>
+                            ?<div className="flex justify-end" key={index}>
                                 <Message message={message}/>
                             </div>
-                            :<div className="flex justify-start" key={message.id} >
+                            :<div className="flex justify-start" key={index} >
                                 <Message message={message}/>
                             </div>
                         )
