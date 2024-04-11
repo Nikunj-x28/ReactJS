@@ -51,10 +51,8 @@ const highlightUser = (WrappedComponent) => {
     // Returns a component
     return ({fullname,id}) => {
         return (
-            <div>
-                <div className="border-blue-600">
-                  <WrappedComponent fullname={fullname} id={id} />
-                </div>
+            <div className="border border-blue-500 rounded p-2">
+                <WrappedComponent fullname={fullname} id={id} />
             </div>
         );
     };

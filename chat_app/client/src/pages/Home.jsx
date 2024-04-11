@@ -5,6 +5,8 @@ import { useState, useEffect ,useContext} from "react";
 import { Socketcontext } from "../context/SocketContext";
 import io from 'socket.io-client';
 import { connectSocket } from "../utils/constants";
+import notificationSound from "../assets/Sounds/oi_you_have_a_text.mp3"; 
+
 const Home = () => {
 
     const {socket,setSocket,setUnreadMessages,currentFriendId} = useContext(Socketcontext);
@@ -27,6 +29,10 @@ const Home = () => {
                         console.log("Message Stored")
                         console.log("In socket ",data.senderId,currentFriendId)
                         console.log(data.message)
+
+                        const audio = new Audio(notificationSound);
+                        audio.play();
+
                         // Update the list of unread messages if the sender is not the current friend
                         setUnreadMessages((prevUnreadMessages) => {
                             if (!prevUnreadMessages.includes(data.senderId)) {
