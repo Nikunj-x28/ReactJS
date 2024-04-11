@@ -4,9 +4,9 @@ import User from "./User.jsx";
 import { Socketcontext } from "../context/SocketContext.js";
 import { highlightUser } from "./User.jsx";
 const ChatMenu = ({userName})=>{
-    const {unreadMessages} = useContext(Socketcontext);
+    // const {unreadMessages} = useContext(Socketcontext);
     const [friends,setFriends] = useState([])
-    const UserhasMessaged = highlightUser(User);
+    // const UserhasMessaged = highlightUser(User);
     useEffect(()=>{
         const loadChat = async ()=>{
             try {
@@ -37,9 +37,10 @@ const ChatMenu = ({userName})=>{
                 ? friends.map((friend) => (
                     <div key={friend._id}>
                         {
-                            unreadMessages.includes(friend._id)
-                            ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
-                            :<User fullname={friend.fullName} id={friend._id}/>
+                            // unreadMessages.includes(friend._id)
+                            // ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
+                            // :
+                            <User fullname={friend.fullName} id={friend._id}/>
                         }
                     </div>
                 ))
@@ -50,9 +51,10 @@ const ChatMenu = ({userName})=>{
                       .map((friend) => (
                           <div key={friend._id}>
                               {
-                                unreadMessages.includes(friend._id)
-                                ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
-                                :<User fullname={friend.fullName} id={friend._id}/>
+                                // unreadMessages.includes(friend._id)
+                                // ?<UserhasMessaged fullname={friend.fullName} id={friend._id}/>
+                                // :
+                                <User fullname={friend.fullName} id={friend._id}/>
                               }
                           </div>
                 ))

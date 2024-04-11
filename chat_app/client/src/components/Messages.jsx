@@ -4,7 +4,6 @@ import MessageContext from "../context/MessageContext"
 const MessageList = () => {
     const messageListRef = useRef(null);
     const {messages} = useContext(MessageContext);
-
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
     useEffect(() => {
@@ -22,10 +21,10 @@ const MessageList = () => {
                         return (
                             message.senderId===userData.data.User._id
                             ?<div className="flex justify-end" key={index}>
-                                <Message message={message}/>
+                                <Message message={message.message}/>
                             </div>
                             :<div className="flex justify-start" key={index} >
-                                <Message message={message}/>
+                                <Message message={message.message}/>
                             </div>
                         )
                 })

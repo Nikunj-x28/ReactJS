@@ -1,13 +1,12 @@
-import Attach from "../assets/img/attach.png"
 import { sendMessage } from "../utils/constants"
 import { useContext, useState } from "react"
-import { Socketcontext } from "../context/SocketContext"
 import MessageContext from "../context/MessageContext"
+import { Socketcontext } from "../context/SocketContext"
 const SendMessage = ()=>{
-    const {setClicked} = useContext(MessageContext)
-    const {currentFriendId} = useContext(Socketcontext)
     const [sentMessage,setSentMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false);
+    const {setMessages} = useContext(MessageContext)
+    const {currentFriendId} = useContext(Socketcontext)
     const handleClick = async ()=>{
         console.log("clicked")
         if(sentMessage=== "" || currentFriendId === null) {
@@ -31,7 +30,7 @@ const SendMessage = ()=>{
                 const responseData = await response.json();
                 console.log('Message sent data:', responseData);
                 setSentMessage("")
-                setClicked(currentFriendId)
+                setMessages((prevMessages)=> [...prevMessages,responseData.data])
             }
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);

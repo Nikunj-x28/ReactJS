@@ -40,7 +40,7 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 
   return res.status(200).json(
-    new ApiResponse(200, 'Message created successfully!!')
+    new ApiResponse(200,newMessage,'Message created successfully!!')
   )
 
 })

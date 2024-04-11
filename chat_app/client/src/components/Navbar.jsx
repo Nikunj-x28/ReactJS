@@ -9,7 +9,7 @@ const NavBar = ()=>{
     // console.log(userData)
     const navigate = useNavigate();
     const handleClick = ()=>{
-        localStorage.removeItem("userData");
+        // localStorage.removeItem("userData");
         localStorage.clear()
         socket.off('newMessage');
         socket.disconnect();

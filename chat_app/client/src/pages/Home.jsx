@@ -13,7 +13,7 @@ const Home = () => {
         
     // message context    
     const [messages, setMessages] = useState([]);
-    const [clicked,setClicked] = useState("");
+    const [clicked,  setClicked]  = useState("");
     
     useEffect(() => {
             if(!socket) {
@@ -22,9 +22,11 @@ const Home = () => {
             else{
                 // Event listener for incoming messages
                 socket.on('newMessage', (data) => {
-                    console.log("Message Came")
                     // Check if the message is from the currently selected friend
                     if (data.senderId !== currentFriendId) {
+                        console.log("Message Stored")
+                        console.log("In socket ",data.senderId,currentFriendId)
+                        console.log(data.message)
                         // Update the list of unread messages if the sender is not the current friend
                         setUnreadMessages((prevUnreadMessages) => {
                             if (!prevUnreadMessages.includes(data.senderId)) {
@@ -33,7 +35,8 @@ const Home = () => {
                             return prevUnreadMessages;
                         });
                     } else {
-                        console.log("In socket ",currentFriendId)
+                        console.log("Message Came")
+                        console.log("In socket ",data.senderId,currentFriendId)
                         console.log(data.message)
                         setMessages([...messages, data]);
                     }
