@@ -5,6 +5,18 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 import jwt from 'jsonwebtoken';
 import { Conversation } from '../models/conversation.model.js';
 
+const validUser = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email: email });
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      user
+    )
+  );
+})
+
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -66,7 +78,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
 
   if (
     [fullName, email, password].some((field) => field?.trim() === "")
@@ -100,6 +112,7 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
+  console.log("LOgin")
   const { password, email } = req.body;
 
   if (!email) {
@@ -182,7 +195,7 @@ const getOneUserConversation = asyncHandler(async (req, res) => {
   console.log("GetOneUserConversation is called");
   const receiverId = req.params.friendId;
   const myId = req.user._id;
-  
+
   const conversation = await Conversation.findOne({ participants: { $all: [myId, receiverId] } })
     .populate('messages')
     .exec();
@@ -204,5 +217,4 @@ const getOneUserConversation = asyncHandler(async (req, res) => {
   );
 });
 
-
-export { registerUser, loginUser, logoutUser, refreshAccessToken, getAllUserData, getOneUserConversation }
+export { registerUser, loginUser, logoutUser, refreshAccessToken, getAllUserData, getOneUserConversation, validUser }

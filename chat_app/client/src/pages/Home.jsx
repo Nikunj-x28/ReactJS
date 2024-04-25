@@ -19,6 +19,7 @@ const Home = () => {
     
     useEffect(() => {
             if(!socket) {
+                console.log("connected")
                 setSocket(io(connectSocket+userData.data.User._id));
             }
             else{

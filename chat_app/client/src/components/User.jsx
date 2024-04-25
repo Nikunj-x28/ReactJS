@@ -1,5 +1,5 @@
 import johncena from "../assets/johncena.jpeg"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import MessageContex from "../context/MessageContext"
 import { Socketcontext } from "../context/SocketContext"
 import { getOneUserConversation } from "../utils/constants"
@@ -7,7 +7,6 @@ const User = ({fullname,id})=>{
     const {setMessages} = useContext(MessageContex)
     const {currentFriendId,setCurrentFriendId,setUnreadMessages} = useContext(Socketcontext)
 
-    // console.log(currentFriendId)
     const handleClick =()=>{
         if(currentFriendId === id) return;
         const caller = async ()=>{

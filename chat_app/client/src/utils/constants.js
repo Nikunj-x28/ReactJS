@@ -1,17 +1,22 @@
-export const signupAPI= "http://localhost:8000/api/v1/user/register";
+const localhost = 'localhost'
+const remote = '192.168.219.223'
 
-export const loginAPI = "http://localhost:8000/api/v1/user/login";
+export const getUser = `http://${localhost}:8000/api/v1/user/getUser`;
 
-export const logoutAPI = "http://localhost:8000/api/v1/user/logout";
+export const signupAPI= `http://${localhost}:8000/api/v1/user/register`;
 
-export const sendMessageAPI = "http://localhost:8000/api/v1/user/sendMessage/:";
+export const loginAPI = `http://${localhost}:8000/api/v1/user/login`;
 
-export const getAllUserData = "http://localhost:8000/api/v1/user/getAllUserData";
+export const logoutAPI = `http://${localhost}:8000/api/v1/user/logout`;
 
-export const getMessage = "http://localhost:8000/api/v1/user/getMessage/:";
+export const sendMessageAPI = `http://${localhost}:8000/api/v1/user/sendMessage/:`;
 
-export const getOneUserConversation = "http://localhost:8000/api/v1/user/getOneUserConversation/"
+export const getAllUserData = `http://${localhost}:8000/api/v1/user/getAllUserData`;
 
-export const sendMessage = "http://localhost:8000/api/v1/user/sendMessage/"
+export const getMessage = `http://${localhost}:8000/api/v1/user/getMessage/:`;
 
-export const connectSocket = "http://localhost:8000?userId="
+export const getOneUserConversation = `http://${localhost}:8000/api/v1/user/getOneUserConversation/`;
+
+export const sendMessage = `http://${localhost}:8000/api/v1/user/sendMessage/`;
+
+export const connectSocket = `http://${localhost}:8000?userId=`;
