@@ -87,3 +87,4 @@ Render Phase:
 Once the differences are identified, React re-renders the component with the updated state value.
 
 
+![reconciliation](images/image.png)
