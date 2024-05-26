@@ -38,6 +38,8 @@ git checkout branch -> head moves to this branch
 
 ### Clone
 git clone is the command you'll use to create local copies of remote repositories (from github for example).
+- **argument = -b <name> or --branch** <name>
+ : Instead of pointing the newly created HEAD to the branch pointed to by the cloned repository’s HEAD, point to <name> branch instead. In a non-bare repository, this is the branch that will be checked out.
 
 ### Checkout remote Branch
 git checkout remote branch puts head in detached state because the remote branch can not be updated locally. If we commit the remote branch wont be updated and header would just point to the new commit.
