@@ -1,10 +1,28 @@
+![alt text](images/overview.png)
 ### Commits
 A commit in a git repository records a snapshot of all the (tracked) files in your directory. It's like a giant copy and paste, but even better!
 
 Git wants to keep commits as lightweight as possible though, so it doesn't just blindly copy the entire directory every time you commit. It can (when possible) compress a commit as a set of changes, or a "delta", from one version of the repository to the next.
 
 ### Branches
-Branches in Git are incredibly lightweight as well. They are simply pointers to a specific commit -- nothing more. 
+Branches in Git are incredibly lightweight as well. They are simply pointers to a specific commit -- nothing more.  
+to create one simply do : `git branch branch-name`  
+to check all the branches : `git branch`
+
+### Checkout
+- To switch from one branch to another : `git checkout <branch_name>` 
+- A shortcut to switch to a branch that is yet to be created with the -b flag : `git checkout -b feature-branch-name`   
+- To switch from one commit to another : `git checkout commit-hash`
+
+### Reset
+Reset Working Directory to Last Commit :`git reset --hard HEAD~1`  
+destroys latest commit and also throws away any uncommitted changes.
+
+Reset Working Directory to Last Commit :`git reset --soft HEAD~1`  
+Undo the commit but keep your changes.
+
+### Restore
+use `git restore --staged <file>...` to unstage
 
 ### Merging
 Great! We now know how to commit and branch. Now we need to learn some kind of way of combining the work from two different branches together. This will allow us to branch off, develop a new feature, and then combine it back in.
@@ -20,12 +38,12 @@ Great! We now know how to commit and branch. Now we need to learn some kind of w
 also can do `git rebase base-branch top-branch`
 
 ### Head
-HEAD is the symbolic name for the currently checked out commit -- it's essentially what commit you're working on top of.
+HEAD is the symbolic name for the currently checked out commit -- it's essentially what commit you're working on top of.  
+When you're on a specific branch, HEAD points to the latest commit on that branch. Sometimes, instead of pointing to the tip of a branch, HEAD can directly point to a specific commit (detached HEAD state).
 ![alt text](images/head.png)
 ![alt text](images/head2.png)
 
 git checkout branch -> head moves to this branch
-
 
 ### Moving Around with Relative Refs
 ^ : git checkout main^ => goto parent commit of current reference of main branch
@@ -42,7 +60,7 @@ git clone is the command you'll use to create local copies of remote repositorie
  : Instead of pointing the newly created HEAD to the branch pointed to by the cloned repository’s HEAD, point to <name> branch instead. In a non-bare repository, this is the branch that will be checked out.
 
 ### Checkout remote Branch
-git checkout remote branch puts head in detached state because the remote branch can not be updated locally. If we commit the remote branch wont be updated and header would just point to the new commit.
+git checkout remote branch puts head in detached state because the remote branch can not be updated locally. If we commit the remote branch wont be updated and header would just point to the new commit. Basically we are doing just local changes on top of the remote branch. The remote branch keeps pointing to the old commit in sync with rmeote repo.
 
 ### fetch
 git fetch essentially brings our local representation of the remote repository into synchronization with what the actual remote repository looks like (right now).
@@ -56,11 +74,12 @@ git merge o/main
 etc., etc.
 
 ### git Pull
-
+- git pull origin branch-name
 ![alt text](images/pull.png)
 ![alt text](images/pull2.png)
 
 ### git push
+- git push origin branch-name
 git push is responsible for uploading your changes to a specified remote and updating that remote to incorporate your new commits. Once git push completes, all your friends can then download your work from the remote.
 
 ### divergent branches
